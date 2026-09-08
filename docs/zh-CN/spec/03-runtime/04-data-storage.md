@@ -58,7 +58,8 @@
  │    ├── before          # bounded pre-tool bytes, when reversible
  │    └── meta.json       # path, hashes, diff state, and ownership
  └── scratch/<sessionId>/ # per-session agent temp files (D114), including
-                          # composer pasted files under pasted/ — deleted
+                          # composer pasted files under pasted/ and replayed/
+                          # image fallbacks — deleted
                           # with the session; startup sweep removes orphans
                           # and stale dirs
 ```
@@ -342,7 +343,7 @@ CREATE TABLE sessions (
                 CHECK (permission_mode IN ('inherit', 'ask', 'accept-edits', 'auto')),
   source      TEXT,                            -- import origin: claude-code | codex | opencode | pi
   pinned      INTEGER NOT NULL DEFAULT 0,
-  last_seq    INTEGER NOT NULL DEFAULT 0,      -- message ordinal allocator
+  last_seq    INTEGER NOT NULL DEFAULT 0,      -- current message count / ordinal allocator
   created_at  INTEGER NOT NULL,
   updated_at  INTEGER NOT NULL
 );
@@ -417,6 +418,7 @@ CREATE TABLE turns (
   ended_at      INTEGER
 );
 CREATE INDEX idx_turns_session ON turns(session_id, started_at DESC);
+CREATE INDEX idx_turns_ended_at ON turns(ended_at DESC);
 ```
 
 ### 4.6a plan_approvals — 不可变的检查点和执行字段（模式 v11）
@@ -538,7 +540,8 @@ type Block =
       completedAt?: string; durationMs?: number;
       toolUsage?: ToolTokenUsage }
   | { type: "attachment"; kind: "image" | "file"; name: string;
-      ref: string /* attachments/<sha256> or absolute path */ };
+      ref: string /* attachments/<sha256> or absolute path */;
+      mimeType?: string; size?: number };
 ```
 
 - 工具结果存储**截断后**（16 个工具结果限制）；满

@@ -49,10 +49,15 @@
       "additionalProperties": { "type": "string" },
       "maxProperties": 32
     },
-    "userAgent": { "type": "string", "maxLength": 256, "description": "legacy; migrates into headers.User-Agent" },
+    "userAgent": {
+      "type": "string",
+      "maxLength": 256,
+      "description": "legacy; migrates into headers.User-Agent"
+    },
     "apiStyle": {
       "enum": [
         "chat_completions",
+        "opencode_go",
         "responses",
         "anthropic_messages",
         "google_generative_ai",
@@ -78,6 +83,30 @@
       }
     },
     "defaultModelId": { "type": "string" },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "contextWindow", "maxTokens", "thinkingLevels", "defaultThinkingLevel"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "contextWindow": { "type": "integer", "minimum": 1 },
+          "maxTokens": { "type": "integer", "minimum": 1 },
+          "thinkingLevels": {
+            "type": "array",
+            "items": { "enum": ["off", "minimal", "low", "medium", "high", "xhigh", "max"] },
+            "uniqueItems": true
+          },
+          "defaultThinkingLevel": {
+            "type": ["string", "null"],
+            "enum": ["off", "minimal", "low", "medium", "high", "xhigh", "max", null]
+          },
+          "supportsImages": { "type": ["boolean", "null"] },
+          "supportsDocuments": { "type": ["boolean", "null"] },
+          "availableForSubagents": { "type": "boolean", "default": false }
+        }
+      }
+    },
     "createdAt": { "type": "string" },
     "updatedAt": { "type": "string" }
   }
@@ -180,6 +209,8 @@ type ModelCatalogCacheRecord = {
   capabilities: string[]
   contextWindow?: number
   source: "bundled" | "discovered" | "user"
+  /** Renderer annotation for a row resolved from the bundled models.dev snapshot. */
+  catalogSource?: "models.dev"
   updatedAt: string
   raw?: unknown
 }

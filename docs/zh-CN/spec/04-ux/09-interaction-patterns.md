@@ -671,7 +671,7 @@ Agent calls a permission-gated tool (including Plan/Goal Bash under Ask or Accep
    Host-core 将准确的 Markdown 字节保留在新的不可变中
    `.pi/plan/*.md` 或 `.pi/goal/*.md` 工件，记录其 path/hash/size 并结构化
    title/question，渲染器显示共享合同审批卡
-   只有标题和神器开启器；问题仍然是主机端合同数据。
+   只有标题和工件开启器；问题仍然是主机端合同数据。
 4. 批准需要询问/接受编辑/自动选择。渲染器会记住
    该设备上最后选择的模式并将其用作下一个批准的模式
    默认。 Host-core提交批准，`mode = agent`，权限模式，

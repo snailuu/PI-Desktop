@@ -6,7 +6,7 @@
   [04-ux/02-i18n-english-first](../spec/04-ux/02-i18n-english-first.md) ·
   [04-e2e-test-plan](../spec/06-delivery/04-e2e-test-plan.md) · E2E-091
 - Updates: the `window.piDesktop` preload contract in
-  [api.ts](../..//apps/desktop/src/lib/api.ts)
+  [api.ts](../../apps/desktop/src/lib/api.ts)
 
 ## Context
 

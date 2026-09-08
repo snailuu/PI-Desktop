@@ -78,10 +78,19 @@ type AppError = {
 type AgentPromptRequest = {
  sessionId: string;
  content: string;
+ attachments?: AgentPromptAttachment[];
  /** Truncate durable transcript to N leading messages before append (regenerate). */
  truncateBefore?: number;
  /** Renderer snapshot used to close the prompt-to-completion notification race. */
  viewingSessionId?: string | null;
+};
+
+type AgentPromptAttachment = {
+ path: string;
+ name: string;
+ kind: "image" | "file";
+ mimeType?: string;
+ size?: number;
 };
 
 type AgentPromptResponse = {
@@ -355,12 +364,19 @@ Electron 将每个主机 `plans.changed` 通知原封不动地转发到
 ### 5.5 getStatus
 
 ```ts
+type AgentActivity =
+ | { phase: "starting"; since: number }
+ | { phase: "waiting-model"; since: number }
+ | { phase: "retrying"; since: number; attempt: number; retryDelayMs?: number }
+ | { phase: "waiting-subagents"; since: number; subagentCount: number };
+
 type AgentStatus = {
  sessionId: string;
  isRunning: boolean;
  currentTurnId?: string;
  modelId?: string;
  pendingToolConfirmations: number;
+ activity?: AgentActivity;
 };
 ```
 
@@ -384,7 +400,7 @@ type AgentEvent =
  | { type: "agent_start" }
  | { type: "agent_end"; messageIds: string[] }
  | { type: "turn_start" }
- | { type: "turn_end" }
+ | { type: "turn_end"; subagentUsage?: MessageUsage }
  | { type: "message_start"; message: UiMessage }
  | { type: "message_update"; message: UiMessage;
      deltaText?: string; deltaThinking?: string }
@@ -539,6 +555,7 @@ Electron 主机。
 type SessionSummary = {
  id: string;
  title: string;
+ messageCount: number;
  projectPath?: string;
  modelId?: string;
  providerId?: string;
@@ -579,7 +596,11 @@ type ToolTokenUsage = {
 };
 
 type SessionDetail = SessionSummary & {
- messages: UiMessage[];
+  messages: UiMessage[];
+  /** Zero-based start offset when the renderer received a bounded page. */
+  messageStart?: number;
+  /** True when an older page can be requested with session.get. */
+  hasMoreBefore?: boolean;
 };
 ```
 

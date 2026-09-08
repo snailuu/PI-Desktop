@@ -51,19 +51,21 @@ function specItems(directory: string, locale: Locale): DefaultTheme.SidebarItem[
     }))
 }
 
-function adrItems(): DefaultTheme.SidebarItem[] {
-  const directory = path.join(docsRoot, 'adr')
+function adrItems(locale: Locale): DefaultTheme.SidebarItem[] {
+  const directory = path.join(docsRoot, locale === 'en' ? 'adr' : 'zh-CN/adr')
+  const routePrefix = locale === 'en' ? '/adr' : '/zh-CN/adr'
   return fs.readdirSync(directory)
-    .filter((file) => file.endsWith('.md') && file !== 'README.md')
+    .filter((file) => file.endsWith('.md') && file !== 'README.md' && file !== 'index.md')
     .sort((left, right) => left.localeCompare(right, 'en'))
     .map((file) => ({
       text: titleFromMarkdown(path.join(directory, file)),
-      link: `/adr/${file.slice(0, -3)}`,
+      link: `${routePrefix}/${file.slice(0, -3)}`,
     }))
 }
 
-function projectItems(): DefaultTheme.SidebarItem[] {
-  const directory = path.join(docsRoot, 'project')
+function projectItems(locale: Locale): DefaultTheme.SidebarItem[] {
+  const directory = path.join(docsRoot, locale === 'en' ? 'project' : 'zh-CN/project')
+  const routePrefix = locale === 'en' ? '/project' : '/zh-CN/project'
   return fs.readdirSync(directory)
     .filter((file) => file.endsWith('.md'))
     .sort((left, right) => {
@@ -73,7 +75,7 @@ function projectItems(): DefaultTheme.SidebarItem[] {
     })
     .map((file) => ({
       text: titleFromMarkdown(path.join(directory, file)),
-      link: `/project/${file.slice(0, -3)}`,
+      link: `${routePrefix}/${file.slice(0, -3)}`,
     }))
 }
 
@@ -114,18 +116,19 @@ function specSidebar(locale: Locale): DefaultTheme.SidebarItem[] {
 const enSidebar: DefaultTheme.Sidebar = {
   '/guide/': [{ text: 'Guide', items: [{ text: 'Start here', link: '/guide/' }, { text: 'Screens', link: '/guide/screenshots' }] }],
   '/plugin-development': [{ text: 'Plugin authoring', items: [{ text: 'Zero to one', link: '/plugin-development' }, ...specItems('07-plugins', 'en')] }],
-  '/project/': [{ text: 'Project records', items: projectItems() }],
+  '/project/': [{ text: 'Project records', items: projectItems('en') }],
   '/spec/': specSidebar('en'),
   '/adr/': [
     {
       text: 'Architecture decisions',
       items: [
+        { text: 'ADR entry', link: '/adr/' },
         { text: 'ADR index', link: '/adr/README' },
         { text: 'Documentation site', link: '/adr/0079-vitepress-documentation-site' },
         { text: 'Latest decisions', link: '/spec/08-meta/decisions-log' },
       ],
     },
-    { text: 'All decisions', collapsed: true, items: adrItems() },
+    { text: 'All decisions', collapsed: true, items: adrItems('en') },
   ],
 }
 
@@ -133,23 +136,25 @@ const zhSidebar: DefaultTheme.Sidebar = {
   '/zh-CN/guide/': [{ text: '指南', items: [{ text: '快速开始', link: '/zh-CN/guide/' }, { text: '界面截图', link: '/zh-CN/guide/screenshots' }] }],
   '/zh-CN/plugin-development': [{ text: '插件开发', items: [{ text: '从零到一', link: '/zh-CN/plugin-development' }, ...specItems('07-plugins', 'zh-CN')] }],
   '/zh-CN/spec/': specSidebar('zh-CN'),
+  '/zh-CN/project/': [{ text: '项目记录', items: projectItems('zh-CN') }],
   '/zh-CN/adr/': [
     {
       text: '架构决策记录',
       items: [
-        { text: 'ADR 索引', link: '/zh-CN/adr/' },
-        { text: '文档站决策', link: '/adr/0079-vitepress-documentation-site' },
+        { text: 'ADR 导览', link: '/zh-CN/adr/' },
+        { text: '完整索引', link: '/zh-CN/adr/README' },
+        { text: '文档站决策', link: '/zh-CN/adr/0079-vitepress-documentation-site' },
         { text: '最新决策', link: '/zh-CN/spec/08-meta/decisions-log' },
       ],
     },
-    { text: '全部英文决策', collapsed: true, items: adrItems() },
+    { text: '全部决策', collapsed: true, items: adrItems('zh-CN') },
   ],
 }
 
 const enNav: DefaultTheme.NavItem[] = [
   { text: 'Guide', link: '/guide/' },
   { text: 'Specs', link: '/spec/README' },
-  { text: 'ADRs', link: '/adr/README' },
+  { text: 'ADRs', link: '/adr/' },
   { text: 'Plugin guide', link: '/plugin-development' },
   { text: 'GitHub', link: 'https://github.com/vastsa/PI-Desktop' },
 ]

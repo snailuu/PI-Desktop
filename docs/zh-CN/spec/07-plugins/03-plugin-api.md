@@ -197,6 +197,20 @@ type PluginModelInfo = {
 ### session（需要 `session.read`）
 ```ts
 pi.session.getLlmContext(): Promise<PluginLlmContext>
+
+type PluginLlmMessage = {
+  role: "user" | "assistant" | "tool" | "system"
+  content: string
+  toolName?: string
+}
+
+type PluginLlmContext = {
+  sessionId: string
+  modelKey: string | null
+  thinkingLevel?: ThinkingLevel
+  messages: PluginLlmMessage[]
+  truncated: boolean
+}
 ```
 
 插件不能传入 session id。身份来自进行中的 `plugins.execute` 会话（D333 / D336）。

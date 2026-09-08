@@ -116,7 +116,7 @@ Renderer 使用接受 create/update 上的可选 `secretValue` 的提供程序�
 - [ ] 渲染器永远不会收到提供商 list/get 上的原始机密
 - [ ] 运行时可以暂时获取一个回合的秘密
 - [ ] 日志在正常故障测试中不包含原始密钥材料
-- [ ] 后备后端在主后端不可用时工作（dev/test 线束）
+- [ ] 后备后端在主后端不可用时工作（dev/test harness）
 - [ ] 厂商账户行报告 `hasSecret` 与 `hasOauth`，且不暴露凭据
 
 ## 10. 厂商账户凭据

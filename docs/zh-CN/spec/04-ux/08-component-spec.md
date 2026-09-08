@@ -173,7 +173,7 @@
 ### 2.2 解剖
 
 ```text
-[☰ Sidebar] [Task title] [●]                     [＋ New] [🔍 Search]
+[☰ Sidebar] [Task title]                          [＋ New] [🔍 Search]
 ```
 
 （图标按功能描述；实际渲染使用 Lucide SVG。`[☰ Sidebar]`
@@ -598,7 +598,7 @@ expanded/collapsed 侧边栏仍为 20px/18px 且启动画面为 64 像素。
 
 ### 5.1 目的
 
-停靠右侧工作栏，用于检查和引导座席的工作空间。可主动启动的表面是插件视图
+停靠右侧工作栏，用于检查和引导代理的工作空间。可主动启动的表面是插件视图
 （ADR 0104），包括随应用打包的 `pi.files`（项目浏览）和 `pi.browser`
 （工作面板浏览器 chrome；访客页仍由宿主拥有，ADR 0170）。审阅与 `file:<path>` 属于
 **产物**表面：由宿主渲染，但由对话打开，因此不出现在工具列表中。
@@ -751,7 +751,7 @@ expanded/collapsed 侧边栏仍为 20px/18px 且启动画面为 64 像素。
   `openWorkPanelTab` 创建；激活打开的视图选择其单例选项卡。活动视图
   结合了中性填充和 2px 边缘标记，打开但不活动的视图显示一个小状态点。
   触发器随面板消失
-  并且在 `Cmd/Ctrl + J` 显示面板后仍然可用。神器
+  并且在 `Cmd/Ctrl + J` 显示面板后仍然可用。工件
   触发器仍然以原子方式创建和激活资源；仅快捷方式
   揭示现有的背景。
 - 资源标题：46px标题显示活动资源图标和
@@ -835,6 +835,8 @@ Maximized/fullscreen 几何形状不受影响。后台会话工件
 
 ```text
 [folder] current-project                         [+]
+           Session title
+[star] pinned-project                             [+]
            Session title
 [folder] another-project                         [+]
            Session title
@@ -1277,13 +1279,9 @@ ToolCallRow 但从未将组标头更改为终端故障。终端
 [sparkle] Processed for 12s  3 steps        [›]
           ├─ [file] Read /src/foo.ts        [›]
           ├─ [search] Searched TODO  24 matches   [›]
-          └─ [terminal] Ran pnpm test  exit 1     [›]
-             ├─ Command      [copy]
-             │  pnpm test
-             ├─ Output       [copy]
-             │  3 passing
-             └─ Errors       [copy]
-                1 failing
+          └─ [terminal] Ran pnpm test  exit 1  • Failed  [copy] [›]
+             3 passing
+             1 failing
 ```
 
 - 领先的 Lucide 图标反映了操作类型：文件、文件夹、搜索、
@@ -1425,7 +1423,7 @@ pi-ai 结果信封携带 `details` 中的结构化有效负载并重复它
 ```text
 [flow] Subagent completed   1 subagent · 1/1 finished · 40s        [›]
   ┌────────────────┐    ┌───────────────────────────────────────────┐
-  │ (◎) Main agent │────│ [bot] code-reviewer      Completed · 32s  │
+  │ (◎) Main agent │────│ [bot] code-reviewer  claude-sonnet-4-5 · Completed · 32s │
   │ Coordinating 1 │    │ check the store diff                      │
   │ delegated task │    │ 3 steps                             [›]   │
   └────────────────┘    └───────────────────────────────────────────┘
@@ -1434,15 +1432,12 @@ pi-ai 结果信封携带 `details` 中的结构化有效负载并重复它
 展开节点后，先是该调用携带的块，然后是子智能体自己的行：
 
 ```text
-└─ [bot] code-reviewer  check the store diff   Completed · 32s   [›]
-   ├─ task                                        [copy]
-   │  Review the changes in src/stores for …
-   ├─ Details
-   │  status  completed   turns  4   toolCalls  9
-   └─ [bot] What code-reviewer did          3 steps
-      ├─ [thinking] Thought for 2s                [›]
-      ├─ [file] Read /src/stores/app-store.ts     [›]
-      └─ The queue drops a request by id, so …
+┌──────────────────────────────────────────────┐
+│ [bot] code-reviewer             Completed · 32s│
+├──────────────────────────────────────────────┤
+│ Task                                         │
+│ Review the changes in src/stores for …       │
+└──────────────────────────────────────────────┘
 ```
 
 - 代表团**始终**可扩展，即使没有结果限制：简介、
@@ -1856,7 +1851,7 @@ MainChat 底部的输入区域，用于撰写和发送提示。支持多行输�
   可用。
 - Goal 共享 Plan 批准表面 (D198)。操作栏从以下位置读取其文案
   提案的 `kind`，因此目标合约显示匹配的批准标签和
-  神器开启器，而布局和记住权限拆分按钮保持不变
+  工件开启器，而布局和记住权限拆分按钮保持不变
   相同。
 
 ### 11.6 辅助功能
@@ -1898,7 +1893,7 @@ MainChat 底部的输入区域，用于撰写和发送提示。支持多行输�
 │  …                                           │
 │  ↑↓ select · Enter confirm · Esc close       │  ← hint bar (footer)
 └──────────────────────────────────────────────┘
-[ file.ext × ] [ another-file.ts × ]            ← when references exist
+[ image.png × ] [ another-file.ts × ]           ← when references exist
 [ composer textarea                            ]
 ```
 

@@ -194,6 +194,9 @@ type MarketPluginDetail = MarketPluginSummary & {
  publishedAt: string
  changelog?: string
  minPiDesktop?: string
+ shasum?: string
+ url?: string
+ sizeBytes?: number
  }>
  screenshots?: string[]
  homepage?: string

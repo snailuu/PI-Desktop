@@ -109,7 +109,7 @@ accept_prompt
     助理批次。提交工具在新的文件中保留精确的 Markdown 字节
     主机拥有的 `.pi/<kind>/*.md` 工件并创建一个待处理的
     `plan_approvals` 行及其 `kind` 加上结构化的 title/question 和
-    神器领域。针对另一种模式调用的提交工具失败
+    工件领域。针对另一种模式调用的提交工具失败
     与 `PLAN_KIND_MISMATCH` 并且什么也不写。
 12. 只有匹配的 `plans.resolve` 才能解决待处理的提案。批准
     以原子方式将持久模式更改为 Agent，存储选定的显式

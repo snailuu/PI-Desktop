@@ -4,6 +4,6 @@
 
 > 目录：`docs/spec/05-security`
 
-| 医生 | 描述 |
+| 文档 | 描述 |
 |---|---|
 | [01-security.md](/zh-CN/spec/05-security/01-security) | 安全基线 |

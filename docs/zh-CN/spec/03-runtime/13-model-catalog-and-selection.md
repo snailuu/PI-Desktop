@@ -137,6 +137,8 @@ type ModelCatalogItem = {
   supportedThinkingLevels?: Array<
     "off" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
   >
+  /** Which known catalog supplied metadata for this row. */
+  catalogSource?: "models.dev"
 }
 ```
 
