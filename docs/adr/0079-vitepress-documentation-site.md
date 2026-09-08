@@ -1,6 +1,6 @@
 # ADR 0079: Use VitePress for the bilingual documentation site
 
-- **Status:** Accepted (mirror scope expanded by ADR 0188)
+- **Status:** Accepted (mirror scope expanded by ADR 0189)
 - **Date:** 2026-08-13
 
 ## Context

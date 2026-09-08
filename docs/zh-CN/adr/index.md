@@ -41,6 +41,9 @@ ADR 记录的是不应被静默更改的架构选择。本条目是通往完整�
  | [ADR 0185：韩语应用外壳](/zh-CN/adr/0185-korean-shell-locale) | 提供完整的韩语外壳、系统语言解析与韩语发布日志目录 |
  | [ADR 0186：显示进行中重试的供应商原因](/zh-CN/adr/0186-retry-cause-in-active-turn-status) | 悬停或聚焦重试状态行可显示错误摘要、错误码与安全的供应商消息 |
  | [ADR 0187：分离任务与交互式原生通知的投递](/zh-CN/adr/0187-separate-task-and-interactive-native-notification-delivery) | 终端任务保持仅在未聚焦时投递，而交互式提示可以向其他已聚焦的会话发送通知 |
+| [ADR 0188：模型配置导入保留不同凭据](/zh-CN/adr/0188-preserve-distinct-import-credentials) | 同一端点的不同 API 密钥作为独立提供商导入，相同凭据仍幂等跳过 |
+| [ADR 0188：导入 WorkBuddy 会话](/zh-CN/adr/0188-workbuddy-session-import) | 保留提示词、工具结果与 AI 标题 |
+| [ADR 0189：完成中文文档镜像](/zh-CN/adr/0189-complete-chinese-documentation-mirror) | 每个文档页面按相同相对路径镜像为中文 |
 
 ## 何时阅读 ADR
 

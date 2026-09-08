@@ -39,6 +39,9 @@ ADRs record architecture choices that should not be changed silently. This entry
  | [ADR 0185: Korean application shell](/adr/0185-korean-shell-locale) | Provide a complete Korean shell, system language resolution, and Korean release log directory |
  | [ADR 0186: Show provider reason for in-progress retries](/adr/0186-retry-cause-in-active-turn-status) | Hovering or focusing the retry status line shows the error summary, error code, and safe provider message |
  | [ADR 0187: Separate task and interactive native notification delivery](/adr/0187-separate-task-and-interactive-native-notification-delivery) | Terminal tasks remain unfocused-only delivery, while interactive prompts can notify other focused sessions |
+| [ADR 0188: Preserve distinct credentials during model configuration import](/adr/0188-preserve-distinct-import-credentials) | Same-endpoint profiles with different API keys import as separate providers; identical credentials stay idempotent |
+| [ADR 0188: Import WorkBuddy sessions](/adr/0188-workbuddy-session-import) | Import WorkBuddy sessions with prompts, tool results, and AI titles preserved |
+| [ADR 0189: Complete the Chinese documentation mirror](/adr/0189-complete-chinese-documentation-mirror) | Mirror every documented page to Chinese at the same relative path |
 
 ## When to read ADRs
 

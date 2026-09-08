@@ -896,6 +896,16 @@ M5。
 - **里程碑**：M2
 - **状态**：草案
 
+#### E2E-199：WorkBuddy 导入保留提示词、工具结果与 AI 标题
+
+- **前提条件**：`~/.workbuddy/projects` 中包含一个会话，其首个用户轮次被包裹在 `<system-reminder>` 上下文中，真正的提示词位于 `<user_query>` 内；一个会话带有压缩摘要块；以及一个会话的工具结果超出内联限制，并被持久化到 `<session>/tool-results/call_*.txt` 下。
+- **步骤**：1）打开 Settings → Import 并扫描会话。2）检查 WorkBuddy 候选项。3）导入一个带有 AI 生成标题的会话。4）打开导入后的对话记录，检查用户轮次、助手轮次和工具行。5）检查输出被外部化的工具行。6）重新导入同一会话。
+- **预期**：候选项显示在 WorkBuddy 来源标签下，并展示 AI 生成的标题，而非被截断的首条消息文本；用户轮次仅包含提示词，不包含注入的 `<system-reminder>` 或压缩块；助手轮次保留其文本；每个工具行都带有工具名称和结果，且外部化的结果展示完整的持久化输出，而非 `<persisted-output>` 存根；reasoning 和 file-history 记录不会渲染为消息；重新导入不会新增重复会话。
+- **链接规格**：`03-runtime/04-data-storage.md`、`04-ux/06-settings-ia.md`、`04-ux/08-component-spec.md`
+- **验收**：F（会话导入审查）
+- **里程碑**：M2
+- **状态**：Draft
+
 #### E2E-038：设置拥有项目存档目标
 
 - **先决条件**：应用程序运行时至少有一个已配置的提供程序、一个受支持的本地会话存储、一个保留的项目和一个存档的项目。
@@ -5164,7 +5174,7 @@ IPC 请求无法关闭。
   服务器正在从存储库运行。
 - **步骤**：1）以 1440×900 打开 `/`，验证英文落地页、系统地图、按意图阅读路径、参考书架、全局搜索、Guide/Specs/ADRs 导航和语言选择器。2）切换到 `/zh-CN/`，验证中文 hero、镜像主题地图和中文规格链接。3）打开 `/spec/03-runtime/01-ipc-protocol` 并切换语言，确认 `/zh-CN/spec/03-runtime/01-ipc-protocol` 包含中文正文、原样保留的代码标识符，以及返回英文源的链接。4）打开 `/adr/0047-context-usage-inspector` 和 `/project/BOARD`，在每页切换语言，确认 `/zh-CN/adr/0047-context-usage-inspector` 与 `/zh-CN/project/BOARD` 渲染中文页面并保留标识符。5）从 `/zh-CN/adr/` 和 `/zh-CN/spec/` 切回英文，确认切换可解析。6）在两种语言下分别搜索并打开一条匹配结果。7）在 390×844 下重复首页和一份长表格规格，覆盖浅色和深色模式。
 - **预期**：两个语言入口和每个镜像页面都不出现失效链接或页面级横向溢出，语言选择器在规格、ADR、项目、指南和导航页面上双向可解析。落地页与阅读列在可用布局内视觉居中；移动端 hero 先呈现文字再呈现系统视觉。搜索返回本地结果。移动端导航打开和关闭时不会位移或遮挡页面。代码块和表格在容器内滚动保持可读，主题对比清晰，且每个中文页面都标识英文页面为其规范来源。在 Vercel 上直接刷新 `/zh-CN/spec/README`、`/zh-CN/spec/03-runtime/01-ipc-protocol`、`/zh-CN/adr/0047-context-usage-inspector`、`/zh-CN/project/BOARD`、`/zh-CN/adr/`、`/spec/README`、`/adr/README` 和 `/spec/`；每条路由都通过文档所述的 `cleanUrls` 配置解析，而不是返回 404。
-- **链接规格**：`02-architecture/04-documentation-site.md`、ADR 0079、ADR 0188
+- **链接规格**：`02-architecture/04-documentation-site.md`、ADR 0079、ADR 0189
 - **验收**：质量、文档可发现性、响应式布局
 - **里程碑**：M6+
 - **状态**：浏览器渲染的 desktop/mobile 验证已获得授权
@@ -5868,6 +5878,33 @@ IPC 请求无法关闭。
 - **验收**：B（设置）、F（供应商）、安全
 - **里程碑**：M5
 - **状态**：单元已覆盖（`network-proxy.test.ts`、`node-proxy.test.ts`、`settings-general.test.mjs`、host-core `network_proxy`）；畸形认证信息和不支持的 SOCKS4 协议由共享解析器测试覆盖；完整 UI 旅程仍为草稿
+
+#### E2E-192：导入会从本地代理存储复制模型配置
+
+- **前提条件**：至少存在一个受支持的本地配置，位于以下位置之一：
+  `~/.claude/settings.json`、`~/.codex/config.toml` 的 `[model_providers.*]`、
+  `~/.config/opencode/opencode.json`、`~/.pi/agent/models.json` 或
+  `~/.cc-switch/cc-switch.db`，其中包括两个具有相同端点但不同密钥的 API 密钥配置，
+  以及一个可选的仅 OAuth 供应商。PI-Desktop 可能已存在等效的提供商。
+- **步骤**：
+  1. 打开设置 → 导入。确认有一个会话卡片和一个模型配置卡片，每个都有自己的扫描按钮。
+  2. 扫描模型配置。确认分组默认折叠，行显示名称、模型数量、主机，以及一个 API 密钥 / 无 API 密钥 徽章，
+     并且 UI 或扫描 IPC 负载中不出现任何密钥值。
+  3. 导入选中的提供商。确认两个相同端点的配置在 设置 → 模型 下显示为单独的行，
+     并在 Composer 模型菜单中保持可选。重新导入相同的选择，确认那些未更改的凭据被跳过。
+  4. 如果应用没有默认模型，确认第一个导入的提供商成为默认模型。如果已存在默认模型，确认其保持不变。
+  5. 确认仅 OAuth 的源账户不在候选列表中，并且会话导入仍然独立工作。
+- **预期**：仅显式扫描 (D007)。存储的 API 密钥存入主机密钥存储。
+  只有等效的提供商（规范化 URL + API 风格 + 相同凭据）才会跳过；同一端点的不同凭据保持独立。
+  没有协议或模式版本升级。
+- **链接规格**：`04-ux/06-settings-ia.md`、
+  `04-ux/08-component-spec.md` §18.5、`03-runtime/01-ipc-protocol.md`、
+  `03-runtime/11-provider-model-system.md`、ADR 0179、D342
+- **验收**：B（模型配置），F（会话导入）
+- **里程碑**：M4
+- **状态**：单元测试覆盖（`packages/shared/src/model-config-import.test.ts`、
+  `apps/desktop/test/model-config-import.test.mjs`）；完整 UI 旅程草稿
+  （除非明确要求，否则不要在本地运行 E2E）
 
 #### E2E-193：文档截图在 GitHub 与 VitePress 中都能解析
 

@@ -1,4 +1,4 @@
-# ADR 0188: Complete the Chinese documentation mirror
+# ADR 0189: Complete the Chinese documentation mirror
 
 - **Status:** Accepted
 - **Date:** 2026-09-09
