@@ -6718,21 +6718,30 @@ This test plan spec is accepted when:
   and verify the translated hero, mirrored topic map, and Chinese specification
   links. 3) Open `/spec/03-runtime/01-ipc-protocol`, switch languages, and
   verify that `/zh-CN/spec/03-runtime/01-ipc-protocol` contains translated prose,
-  preserved code identifiers, and a link back to the English source. 4) Search
-  in each locale and open a matching result. 5) Repeat the homepage and a long
-  table-heavy specification at 390×844 in light and dark mode.
-- **Expected**: Both locale entry points and every English/Chinese specification
-  pair render without broken links or page-level horizontal overflow. Landing
-  and reading columns are visually centered within their available layout; the
-  mobile hero presents text before the system visual. Search returns local
-  results. The mobile navigation opens and closes without shifting or obscuring
-  the page. Code blocks and tables remain readable through contained scrolling,
-  theme contrast stays clear, and every Chinese spec identifies the English
-  page as its canonical source. Directly refresh `/zh-CN/spec/README`,
-  `/zh-CN/spec/03-runtime/01-ipc-protocol`, `/zh-CN/adr/`, `/spec/README`, and
-  `/adr/README` on Vercel; each route resolves through the documented
-  `cleanUrls` configuration instead of returning 404.
-- **Specs linked**: `02-architecture/04-documentation-site.md`, ADR 0079
+  preserved code identifiers, and a link back to the English source. 4) Open
+  `/adr/0047-context-usage-inspector` and `/project/BOARD`, switch languages on
+  each, and verify `/zh-CN/adr/0047-context-usage-inspector` and
+  `/zh-CN/project/BOARD` render translated pages with preserved identifiers.
+  5) From `/zh-CN/adr/` and `/zh-CN/spec/`, switch back to English and confirm
+  the switch resolves. 6) Search in each locale and open a matching result.
+  7) Repeat the homepage and a long table-heavy specification at 390×844 in
+  light and dark mode.
+- **Expected**: Both locale entry points and every mirrored page render without
+  broken links or page-level horizontal overflow, and the language selector
+  resolves in both directions on specification, ADR, project, guide, and
+  navigation pages. Landing and reading columns are visually centered within
+  their available layout; the mobile hero presents text before the system
+  visual. Search returns local results. The mobile navigation opens and closes
+  without shifting or obscuring the page. Code blocks and tables remain readable
+  through contained scrolling, theme contrast stays clear, and every Chinese
+  page identifies the English page as its canonical source. Directly refresh
+  `/zh-CN/spec/README`, `/zh-CN/spec/03-runtime/01-ipc-protocol`,
+  `/zh-CN/adr/0047-context-usage-inspector`, `/zh-CN/project/BOARD`,
+  `/zh-CN/adr/`, `/spec/README`, `/adr/README`, and `/spec/` on Vercel; each
+  route resolves through the documented `cleanUrls` configuration instead of
+  returning 404.
+- **Specs linked**: `02-architecture/04-documentation-site.md`, ADR 0079,
+  ADR 0188
 - **Acceptance**: Quality, documentation discoverability, responsive layout
 - **Milestone**: M6+
 - **Status**: Browser-rendered desktop/mobile verification is authorized for

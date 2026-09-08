@@ -2,9 +2,10 @@
 
 ADRs record decisions that should not silently change.
 
-The [Chinese ADR entry](/zh-CN/adr/) follows the same decision map and points to
-these records. Decision IDs, status, and the English record remain the source of
-truth for both locales.
+The [Chinese ADR mirror](/zh-CN/adr/README) translates every record at the same
+relative path, and the [curated ADR entry](/adr/) offers a shorter reading path
+into the same set. Decision IDs, status, and the English record remain the
+source of truth for both locales.
 
 ## Format
 
