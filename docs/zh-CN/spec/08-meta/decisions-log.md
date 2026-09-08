@@ -905,7 +905,7 @@ project/group 层，而主要操作和页脚标识仍保留在
 - 两种传输方式而不是单独的 stdio：托管 MCP 端点很常见
   足以让 stdio-only 推送插件将其包装在本地垫片中，
   这更糟糕——一个额外的过程和一个无法审查的代理。
-- D176决定； ADR [0038](/adr/0038-plugin-mcp-bridge)。
+- D176决定； ADR [0038](/zh-CN/adr/0038-plugin-mcp-bridge)。
 
 ## 2026-07-31 — 驻留插件服务及其重启策略
 
@@ -986,7 +986,7 @@ project/group 层，而主要操作和页脚标识仍保留在
   类别文件。记录器使用 UTF-8 记录和处理的字节长度
   旋转和磁盘故障尽最大努力。现有的平面日志文件不是
   迁移过程中删除。
-- D182决定； ADR [0046](/adr/0046-categorized-process-logs)。
+- D182决定； ADR [0046](/zh-CN/adr/0046-categorized-process-logs)。
 
 ## 2026-08-02 — 上下文使用检查器
 
@@ -1016,7 +1016,7 @@ project/group 层，而主要操作和页脚标识仍保留在
 - 检查器从相同的 `pi-ai` 模型解析其上下文窗口总数
   记录传递给代理 sidecar，丰富 cached/discovered 模型行；
 提供程序元数据和 128K 默认值仍然是未知模型的后备方案。
-- D184决定； ADR [0047](/adr/0047-context-usage-inspector)。
+- D184决定； ADR [0047](/zh-CN/adr/0047-context-usage-inspector)。
 
 ## 2026-08-02 — 延迟每回合工具激活
 
@@ -1036,7 +1036,7 @@ project/group 层，而主要操作和页脚标识仍保留在
 - 主机权限、工作区和暂存控制、超时和审核
   行为不变。持久化工具结果保留激活标记
   有效的转录重建。
-- D185决定； ADR [0048](/adr/0048-lazy-per-turn-tool-activation)。
+- D185决定； ADR [0048](/zh-CN/adr/0048-lazy-per-turn-tool-activation)。
 
 ## 2026-08-04 — 绑定提供商流恢复和诊断
 
@@ -1052,7 +1052,7 @@ project/group 层，而主要操作和页脚标识仍保留在
   不匹配后的 read/regeneration。第二个相同路径 `Edit` 失败或
   失败的 shell patch 命令会发出终止工具提示，而不是
   修复旧的补丁工件。
-- D186决定；请参阅 [ADR 0050](/adr/0050-bounded-provider-stream-recovery)。
+- D186决定；请参阅 [ADR 0050](/zh-CN/adr/0050-bounded-provider-stream-recovery)。
 
 ## 2026-08-04 — 使用保留尾部恢复自动压缩失败
 
@@ -1081,7 +1081,7 @@ project/group 层，而主要操作和页脚标识仍保留在
   启动错误；这不是未处理的线程生成恐慌。
 - 登录 shell 路径探测也使用 `thread::Builder` 并回退到
   当可选帮助程序无法启动时继承的 PATH。
-- D187决定；请参阅 [ADR 0051](/adr/0051-host-rpc-stdio-resource-isolation)。
+- D187决定；请参阅 [ADR 0051](/zh-CN/adr/0051-host-rpc-stdio-resource-isolation)。
 
 ## Plan 检查点和 shell 决策 (0.4.14)
 
@@ -1111,7 +1111,7 @@ D193 和 D194。
 - 数据库打开重写 `sessions.mode = 'chat'` 和存储的 `defaultMode`
   `chat` 到 `agent` — 架构 v7 内的数据修复，而不是版本碰撞。
 - D191决定，由D189取代；看到
-  [ADR 0055](/adr/0055-agent-only-mode)。它删除了模式概念
+  [ADR 0055](/zh-CN/adr/0055-agent-only-mode)。它删除了模式概念
   返回为 Plan (D188/D189, ADR 0052/0053)；该条目被保留，因为
   `read-only` 规范化和它所描述的 `chat` 修复已发布。
 

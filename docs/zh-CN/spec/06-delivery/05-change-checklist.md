@@ -4,7 +4,7 @@
 
 
 > 代理在完成工作之前必须运行一份实用的清单。
-> 交叉引用：[ai-development-workflow](/zh-CN/spec/06-delivery/03-ai-development-workflow) · [e2e-test-plan](/zh-CN/spec/06-delivery/04-e2e-test-plan) · [决策日志](/zh-CN/spec/08-meta/decisions-log) · [ADR 索引](/adr/README) · [BOARD](/project/BOARD)
+> 交叉引用：[ai-development-workflow](/zh-CN/spec/06-delivery/03-ai-development-workflow) · [e2e-test-plan](/zh-CN/spec/06-delivery/04-e2e-test-plan) · [决策日志](/zh-CN/spec/08-meta/decisions-log) · [ADR 索引](/zh-CN/adr/README) · [BOARD](/zh-CN/project/BOARD)
 
 ---
 
