@@ -95,7 +95,7 @@ function specSidebar(locale: Locale): DefaultTheme.SidebarItem[] {
     .sort((left, right) => left.localeCompare(right, 'en'))
     .map((file) => ({
       text: titleFromMarkdown(path.join(localizedRoot, file)),
-      link: `${routePrefix}/${file.slice(0, -3)}`,
+      link: file === 'index.md' ? `${routePrefix}/` : `${routePrefix}/${file.slice(0, -3)}`,
     }))
 
   return [

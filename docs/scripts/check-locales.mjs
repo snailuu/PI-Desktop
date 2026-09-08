@@ -46,8 +46,7 @@ function routeFor(relativePath) {
 function proseStats(source) {
   let fence = null
   let fences = 0
-  let rows = 0
-  let cells = 0
+  const tableRows = []
   for (const line of source.split('\n')) {
     const marker = line.match(/^\s*(```|~~~)/)
     if (marker) {
@@ -58,11 +57,10 @@ function proseStats(source) {
     if (fence) continue
     const trimmed = line.trim()
     if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
-      rows += 1
-      cells += [...trimmed].filter((character) => character === '|').length
+      tableRows.push([...trimmed].filter((character) => character === '|').length)
     }
   }
-  return { fences, rows, cells }
+  return { fences, tableRows }
 }
 
 const englishFiles = mirroredFiles('')
@@ -96,21 +94,20 @@ for (const relativePath of englishFiles) {
   if (englishStats.fences !== chineseStats.fences) {
     reasons.push(`fenced code blocks ${englishStats.fences} -> ${chineseStats.fences}`)
   }
-  if (englishStats.rows !== chineseStats.rows) {
-    reasons.push(`table rows ${englishStats.rows} -> ${chineseStats.rows}`)
-  }
-  if (englishStats.cells !== chineseStats.cells) {
-    reasons.push(`table cells ${englishStats.cells} -> ${chineseStats.cells}`)
+  if (englishStats.tableRows.length !== chineseStats.tableRows.length) {
+    reasons.push(`table rows ${englishStats.tableRows.length} -> ${chineseStats.tableRows.length}`)
+  } else if (englishStats.tableRows.some((cells, index) => cells !== chineseStats.tableRows[index])) {
+    reasons.push('table row cell counts differ')
   }
   if (reasons.length) invalid.push(`${relativePath}: ${reasons.join('; ')}`)
 
   for (const match of chineseSource.matchAll(/\]\((\/zh-CN\/[^)\s#?]+)/g)) {
     const target = match[1].replace(/\/$/, '')
-    if (/\.[a-z0-9]{2,5}$/i.test(target)) continue
     if (target.endsWith('.md')) {
       danglingLinks.push(`${relativePath}: link keeps .md suffix (${match[1]})`)
       continue
     }
+    if (/\.[a-z0-9]{2,5}$/i.test(target)) continue
     if (!chineseRoutes.has(target)) danglingLinks.push(`${relativePath}: dangling Chinese link (${match[1]})`)
   }
 }

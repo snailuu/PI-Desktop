@@ -85,6 +85,7 @@ Each ADR includes:
 | 0062 | Bounded subagents behind a Task tool | Accepted for implementation |
 | 0063 | A managed surface for subagent definitions | Accepted for implementation |
 | 0064 | Codex-parity context compaction | Accepted (amends 0061 / 0030) |
+| 0065 | Smooth shell layout and stream feedback | Accepted for implementation |
 | 0066 | Empty home direct bottom composer | Accepted for implementation (amends D111) |
 | 0067 | ChatGPT-inspired empty-home starter guidance | Superseded by D206 |
 | 0068 | Add a keyboard entry point for the work panel | Accepted for implementation |
@@ -96,6 +97,8 @@ Each ADR includes:
 | 0074 | Native notification permission for plugins | Accepted |
 | 0075 | Manual reload for development-plugin permission ceilings | Accepted |
 | 0076 | Capture the Windows-reserved plugin launcher chord in host-core | Accepted |
+| 0077 | Add an interactive multi-question asktool | Accepted for implementation |
+| 0078 | Cross-platform tray-resident minimize | Accepted for implementation (amended by ADR 0117 and ADR 0123) |
 | 0079 | Use VitePress for the bilingual documentation site | Accepted |
 | 0080 | Prewarm the global plugin launcher after boot | Accepted |
 | 0081 | Host-owned cross-platform plugin panel chrome | Accepted |
@@ -129,8 +132,10 @@ Each ADR includes:
 | 0109 | Open Files entries with the OS-associated application | Accepted |
 | 0110 | Version the plugin panel chrome spacing contract | Accepted |
 | 0111 | Reveal Files in the OS file manager | Accepted |
+| 0112 | Agent Capability Management Roots and Settings IA | Accepted |
 | 0113 | Persist the New Task empty slot immediately and deduplicate it by message count | Accepted |
 | 0114 | Persist provider model bindings and thinking configuration | Accepted |
+| 0115 | Keep plugin clipboard history host-owned and in memory | Accepted (amended 2026-08-21) |
 | 0116 | Add OpenCode Go as a fixed provider preset | Accepted (amended: session routing headers) |
 | 0117 | Preserve the Windows taskbar entry for native minimize | Accepted |
 | 0118 | Keep queued prompts renderer-owned and stop runs at turn boundaries | Accepted |
@@ -157,6 +162,7 @@ Each ADR includes:
 | 0140 | Fold the three peer tools into one `Peer` tool | Superseded by 0147 |
 | 0141 | Make expanded sidebar width user-resizable | Accepted |
 | 0142 | Allow non-loopback HTTP MCP endpoints with explicit risk disclosure | Accepted |
+| 0143 | Make Session Titles User-Renamable | Accepted |
 | 0144 | Allow user-configured thinking-level overrides | Accepted |
 | 0145 | Publish native macOS Intel artifacts | Accepted |
 | 0146 | Assign outer and inner work-panel resize ownership by boundary | Superseded by 0151 |
@@ -201,3 +207,4 @@ Each ADR includes:
 | 0185 | Korean shell locale | Accepted (amends 0160 / 0183) |
 | 0186 | Summarize first-turn session titles with a main-owned one-shot | Accepted |
 | 0187 | Focus-aware native task notifications | Accepted (amends 0107 / D117) |
+| 0188 | Complete the Chinese documentation mirror | ** Accepted |
